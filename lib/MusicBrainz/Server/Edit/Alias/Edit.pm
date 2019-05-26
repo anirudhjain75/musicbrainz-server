@@ -17,6 +17,7 @@ use MusicBrainz::Server::Edit::Utils qw(
     date_closure
     merge_partial_date
 );
+use MusicBrainz::Server::Data::Utils qw( boolean_to_json );
 
 use aliased 'MusicBrainz::Server::Entity::PartialDate';
 
@@ -114,8 +115,8 @@ sub build_display_data
             old => PartialDate->new_from_row($self->data->{old}{end_date}),
         },
         primary_for_locale => {
-            new => $self->data->{new}{primary_for_locale},
-            old => $self->data->{old}{primary_for_locale},
+            new => boolean_to_json($self->data->{new}{primary_for_locale}),
+            old => boolean_to_json($self->data->{old}{primary_for_locale}),
         },
         ended => {
             new => $self->data->{new}{ended},

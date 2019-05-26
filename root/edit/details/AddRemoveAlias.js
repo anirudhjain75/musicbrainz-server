@@ -1,67 +1,106 @@
-/* eslint-disable no-negated-condition */
+/*
+ * @flow
+ * Copyright (C) 2019 Anirudh Jain
+ *
+ * This file is part of MusicBrainz, the open internet music database,
+ * and is licensed under the GPL version 2, or (at your option) any
+ * later version: http://www.gnu.org/licenses/gpl-2.0.txt
+ */
 import React from 'react';
 
+import bracketed from '../../static/scripts/common/utility/bracketed';
 import formatEntityTypeName from '../../static/scripts/common/utility/formatEntityTypeName';
+import formatDate from '../../static/scripts/common/utility/formatDate';
+import isDateEmpty from '../../static/scripts/common/utility/isDateEmpty';
 import DescriptiveLink from '../../static/scripts/common/components/DescriptiveLink';
 import EntityLink from '../../static/scripts/common/components/EntityLink';
+import locales from '../../static/scripts/common/constants/locales';
 import isolateText from '../../static/scripts/common/utility/isolateText';
 import yesNo from '../../static/scripts/common/utility/yesNo';
 
-const AddRemoveAlias = ({edit}) => {
+type AliasEntityTypeT = $ElementType<AliasEntityTypeT, 'entityType'>;
+
+type AddRemoveAliasEditT = {
+  edit: {
+    ...EditT,
+    display_data: {
+      alias: string,
+      begin_date: PartialDateT,
+      end_date: PartialDateT,
+      ended: boolean,
+      entity_type: AliasEntityTypeT,
+      locale: string,
+      primary_for_locale: boolean,
+      sort_name: string,
+      type: AliasT,
+    },
+  },
+};
+
+const AddRemoveAlias = ({edit}: AddRemoveAliasEditT) => {
   const display = edit.display_data;
   const entityType = display.entity_type;
   const entity = display[entityType];
   return (
     <table className={`details ${edit.edit_kind}-${entityType}-alias`}>
       <tr>
-        <th>{addColon(formatEntityTypeName(entityType))}</th>
+        <th>{addColonText(formatEntityTypeName(entityType))}</th>
         <td>
           <DescriptiveLink entity={entity} />
-          {(entity && entity.gid) ? <EntityLink entity={entity} title={` ${bracketed(l('view all aliases'))}`} /> : null}
+          {' '}
+          {(entity && entity.gid)
+            ? bracketed(
+              <EntityLink
+                content={l('view all aliases')}
+                entity={entity}
+                subPath="aliases"
+              />,
+            ) : null}
         </td>
       </tr>
       <tr>
-        <th>{addColon(l('Alias'))}</th>
+        <th>{addColonText(l('Alias'))}</th>
         <td>{isolateText(display.alias)}</td>
       </tr>
-      {(display.sort_name !== '') ? (
+      {display.sort_name ? (
         <tr>
-          <th>{addColon(l('Sort name'))}</th>
+          <th>{addColonText(l('Sort name'))}</th>
           <td>{display.sort_name}</td>
         </tr>
       ) : null}
-      {(display.locale !== '') ? (
+      {display.locale ? (
         <>
           <tr>
-            <td>{addColon(l('Locale'))}</td>
-            <td>{display.locale}</td>
+            <th>{addColonText(l('Locale'))}</th>
+            <td>{locales[display.locale]}</td>
           </tr>
           <tr>
-            <td>{addColon(l('Primary for locale'))}</td>
+            <th>{addColonText(l('Primary for locale'))}</th>
             <td>{yesNo(display.primary_for_locale)}</td>
           </tr>
         </>
       ) : null}
-      {(display.type) ? (
+
+      {display.type ? (
         <tr>
-          <td>{addColon(l('Type'))}</td>
-          <tr>{display.type.name}</tr>
+          <th>{addColonText(l('Type'))}</th>
+          <td>{lp_attributes(display.type.name, 'alias_type')}</td>
         </tr>
       ) : null}
-      {(!display.begin_data.is_empty) ? (
+      {isDateEmpty(display.begin_date) ? null : (
         <tr>
-          <td>{addColon(l('Begin date'))}</td>
-          <td>{display.begin_data.format}</td>
+          <th>{addColonText(l('Begin date'))}</th>
+          <td>{formatDate(display.begin_date)}</td>
         </tr>
-      ) : null}
-      {(!display.end_date.is_empty) ? (
+      )}
+      {isDateEmpty(display.end_date) ? null : (
         <tr>
-          <td>{addColon(l('End date'))}</td>
-          <td>{display.end_date.format}</td>
+          <th>{addColonText(l('End date'))}</th>
+          <td>{formatDate(display.end_date)}</td>
         </tr>
-      ): null}
+      )}
       <tr>
-        <td>{addColon(l('Ended'))}</td>
+        <th>{addColonText(l('Ended'))}</th>
         <td>{yesNo(display.ended)}</td>
       </tr>
     </table>
