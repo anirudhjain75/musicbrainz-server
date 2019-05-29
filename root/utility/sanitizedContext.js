@@ -17,10 +17,11 @@ const sanitizedEditor = require('./sanitizedEditor');
  * for embedding into server-generated markup.
  */
 function sanitizedContext(
-  $c /*: CatalystContextT */,
-) /*: SanitizedCatalystContextT */ {
+  $c /* : CatalystContextT */,
+) /* : SanitizedCatalystContextT */ {
   const user = $c.user;
   return {
+    req: {uri: $c.req.uri},
     user: user ? sanitizedEditor(user) : null,
     user_exists: $c.user_exists,
   };

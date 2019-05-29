@@ -20,6 +20,26 @@ declare type AggregatedTagT = {|
   +count: number,
 |};
 
+declare type AliasFormT = {|
+  +field: {
+    +edit_note: FieldT<string>,
+    +locale: FieldT<string>,
+    +make_votable: FieldT<boolean>,
+    +name: FieldT<string>,
+    +period: {
+      +begin_date: FieldT<PartialDateT>,
+      +end_date: FieldT<PartialDateT>,
+      +ended: FieldT<boolean>,
+    },
+    +primary_for_locale: FieldT<boolean>,
+    +sort_name: FieldT<string>,
+    +type_id: FieldT<number>,
+  },
+  +has_errors: boolean,
+  +name: string,
+|};
+
+
 declare type AliasT = {|
   ...DatePeriodRoleT,
   ...EditableRoleT,
@@ -825,6 +845,9 @@ declare type ReadOnlyRepeatableFieldT<+F> = {|
 |};
 
 declare type SanitizedCatalystContextT = {|
+  +req: {
+    +uri: string,
+  },
   +user: SanitizedEditorT | null,
   +user_exists: boolean,
 |};
