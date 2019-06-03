@@ -61,6 +61,7 @@ module.exports = {
   'entity/Details': require('../entity/Details'),
   'entity/Subscribers': require('../entity/Subscribers'),
   'entity/Tags': require('../entity/Tags'),
+  'event/EventIndex': require('../event/EventIndex'),
   'event/NotFound': require('../event/NotFound'),
   'genre/CreateGenre': require('../genre/CreateGenre'),
   'genre/DeleteGenre': require('../genre/DeleteGenre'),
