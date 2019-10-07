@@ -3,16 +3,12 @@
 // Licensed under the GPL version 2, or (at your option) any later version:
 // http://www.gnu.org/licenses/gpl-2.0.txt
 
-import $ from 'jquery';
 import ko from 'knockout';
 import _ from 'lodash';
 
 import {compare} from '../common/i18n';
 import MB from '../common/MB';
 import {stripAttributes} from '../edit/utility/linkPhrase';
-
-const ELEMENT_NODE = window.Node.ELEMENT_NODE;
-const COMMENT_NODE = window.Node.COMMENT_NODE;
 
 function cmpOptions(a, b) {
     return (a.data.child_order - b.data.child_order) || compare(a.text, b.text);
@@ -85,6 +81,9 @@ ko.bindingHandlers.loop = {
         // The way this binding handler works is by using the "arrayChange"
         // event found on observableArrays, which notifies a list of changes
         // we can apply to the UI.
+
+        const ELEMENT_NODE = window.Node.ELEMENT_NODE;
+        const COMMENT_NODE = window.Node.COMMENT_NODE;
 
         if (!ko.isObservable(observableArray) || !observableArray.cacheDiffForKnownOperation) {
             throw new Error("items must an an observableArray");
@@ -273,6 +272,7 @@ ko.bindingHandlers.withLabel = {
     update: function (element, valueAccessor, allBindings,
                       viewModel, bindingContext) {
 
+        const $ = require('jquery');
         var name = valueAccessor() + "-" + bindingContext.$index();
 
         $(element).attr("id", name)

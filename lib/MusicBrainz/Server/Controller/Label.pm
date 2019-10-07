@@ -161,12 +161,13 @@ with 'MusicBrainz::Server::Controller::Role::Merge' => {
 with 'MusicBrainz::Server::Controller::Role::Create' => {
     form      => 'Label',
     edit_type => $EDIT_LABEL_CREATE,
-    dialog_template => 'label/edit_form.tt',
+    dialog_template_react => 'label/Create.js',
 };
 
 with 'MusicBrainz::Server::Controller::Role::Edit' => {
     form           => 'Label',
     edit_type      => $EDIT_LABEL_EDIT,
+    dialog_template_react => 'label/Edit.js'
 };
 
 with 'MusicBrainz::Server::Controller::Role::Delete' => {

@@ -373,7 +373,7 @@ test('BugFixes', function (t) {
     },
     {
       input: 'Boy In Da Corner / Fire Ina Hole / Bird Inna De Nest / Rock Di Mexicano',
-      expected: 'Boy in da Corner / Fire ina Hole / Bird inna de Nest / Rock di Mexicano',
+      expected: 'Boy in da xCorner / Fire ina Hole / Bird inna de Nest / Rock di Mexicano',
       bug: 'MBS-1315',
       mode: 'English',
     },

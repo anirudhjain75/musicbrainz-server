@@ -504,13 +504,17 @@ sub TO_JSON {
         number_of_collections
         number_of_revisions
         own_collections
+        relationship_editor_html
         release_artwork
+        series_types
+        series_ordering_types
         server_details
         server_languages
         subscribed
         to_merge
         top_tags
         user_tags
+        work_form_json
     );
 
     my %stash;

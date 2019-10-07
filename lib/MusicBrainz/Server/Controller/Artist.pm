@@ -519,7 +519,7 @@ is done via L<MusicBrainz::Server::Form::Artist>
 with 'MusicBrainz::Server::Controller::Role::Create' => {
     form      => 'Artist',
     edit_type => $EDIT_ARTIST_CREATE,
-    dialog_template => 'artist/edit_form.tt',
+    dialog_template_react => 'artist/Create.js',
 };
 
 =head2 edit
@@ -579,7 +579,8 @@ with 'MusicBrainz::Server::Controller::Role::Edit' => {
                     $c->uri_for_action('/artist/show', [ $artist->gid ]));
             },
         );
-    }
+    },
+    dialog_template_react => 'artist/Edit.js'
 };
 
 =head2 add_release

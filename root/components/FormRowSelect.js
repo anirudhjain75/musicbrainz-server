@@ -22,6 +22,7 @@ type Props = {|
   +frozen?: boolean,
   +helpers?: React.Node,
   +label: string,
+  +multiple?: boolean,
   +onChange?: (event: SyntheticEvent<HTMLSelectElement>) => void,
   +options: MaybeGroupedOptionsT,
   /*
@@ -38,6 +39,7 @@ const FormRowSelect = ({
   field,
   helpers,
   label,
+  multiple = false,
   onChange,
   options,
   required = false,
@@ -54,6 +56,7 @@ const FormRowSelect = ({
         allowEmpty={allowEmpty}
         disabled={frozen}
         field={field}
+        multiple={multiple}
         onChange={onChange}
         options={options}
         required={required}
