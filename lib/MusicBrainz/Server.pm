@@ -500,9 +500,12 @@ sub TO_JSON {
         number_of_collections
         number_of_revisions
         own_collections
+        relationship_editor_html
         release_artwork
         release_artwork_count
         release_cdtoc_count
+        series_types
+        series_ordering_types
         server_details
         server_languages
         subscribed
